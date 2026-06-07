@@ -29,7 +29,24 @@ export const appointmentApi = {
   schedule: (id, data) => request.post(`/appointments/${id}/schedule`, data),
   rainDelay: (id, data) => request.post(`/appointments/${id}/rain-delay`, data),
   reschedule: (id, data) => request.post(`/appointments/${id}/reschedule`, data),
-  cancel: (id, data) => request.post(`/appointments/${id}/cancel`, data)
+  rescheduleV2: (id, data) => request.post(`/appointments/${id}/reschedule-v2`, data),
+  cancel: (id, data) => request.post(`/appointments/${id}/cancel`, data),
+  getRescheduleRecords: (id) => request.get(`/appointments/${id}/reschedule-records`),
+  getGrowerRescheduleRecords: (growerId) => request.get(`/appointments/grower/${growerId}/reschedule-records`),
+  batchRescheduleRain: (data) => request.post('/appointments/batch-reschedule-rain', data),
+  getMachineSlotUtilization: (cooperativeId, startDate, endDate) => 
+    request.get('/appointments/machine-slot-utilization', { 
+      params: { cooperativeId, startDate, endDate } 
+    })
+}
+
+export const rainReportApi = {
+  getAll: () => request.get('/rain-reports'),
+  getById: (id) => request.get(`/rain-reports/${id}`),
+  getByField: (fieldId) => request.get(`/rain-reports/field/${fieldId}`),
+  getByAppointment: (appointmentId) => request.get(`/rain-reports/appointment/${appointmentId}`),
+  getByOperator: (operatorId) => request.get(`/rain-reports/operator/${operatorId}`),
+  create: (data) => request.post('/rain-reports', data)
 }
 
 export const workOrderApi = {

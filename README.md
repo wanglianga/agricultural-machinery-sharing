@@ -232,7 +232,20 @@ wl-265/
 - `POST /api/appointments/{id}/schedule` - 预约排程
 - `POST /api/appointments/{id}/rain-delay` - 雨后改期
 - `POST /api/appointments/{id}/reschedule` - 重新排程
+- `POST /api/appointments/{id}/reschedule-v2` - 重新排程（带操作人，记录改期历史）
 - `POST /api/appointments/{id}/cancel` - 取消预约
+- `GET /api/appointments/{id}/reschedule-records` - 获取预约的改期记录
+- `GET /api/appointments/grower/{growerId}/reschedule-records` - 获取种植户的所有改期记录
+- `POST /api/appointments/batch-reschedule-rain` - 批量重新排程雨后延期预约（含相邻地块提前作业）
+- `GET /api/appointments/machine-slot-utilization` - 获取机具空档利用情况统计
+
+### 雨后报告管理
+- `GET /api/rain-reports` - 获取所有雨后报告
+- `GET /api/rain-reports/{id}` - 获取雨后报告详情
+- `GET /api/rain-reports/field/{fieldId}` - 获取地块的雨后报告
+- `GET /api/rain-reports/appointment/{appointmentId}` - 获取预约的雨后报告
+- `GET /api/rain-reports/operator/{operatorId}` - 获取农机手的雨后报告
+- `POST /api/rain-reports` - 提交雨后报告（自动处理预约改期）
 
 ### 作业单管理
 - `GET /api/work-orders` - 获取所有作业单

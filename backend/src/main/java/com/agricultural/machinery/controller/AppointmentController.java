@@ -1,6 +1,7 @@
 package com.agricultural.machinery.controller;
 
 import com.agricultural.machinery.entity.Appointment;
+import com.agricultural.machinery.entity.RescheduleRecord;
 import com.agricultural.machinery.service.AppointmentService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -83,6 +84,39 @@ public class AppointmentController {
         return ResponseEntity.ok(appointmentService.cancelAppointment(id, reason));
     }
 
+    @GetMapping("/{id}/reschedule-records")
+    public ResponseEntity<List<RescheduleRecord>> getRescheduleRecordsByAppointmentId(@PathVariable Long id) {
+        return ResponseEntity.ok(appointmentService.getRescheduleRecordsByAppointmentId(id));
+    }
+
+    @GetMapping("/grower/{growerId}/reschedule-records")
+    public ResponseEntity<List<RescheduleRecord>> getRescheduleRecordsByGrowerId(@PathVariable Long growerId) {
+        return ResponseEntity.ok(appointmentService.getRescheduleRecordsByGrowerId(growerId));
+    }
+
+    @PostMapping("/{id}/reschedule-v2")
+    public ResponseEntity<Appointment> rescheduleAfterRainV2(
+            @PathVariable Long id,
+            @RequestBody RescheduleV2Request request) {
+        return ResponseEntity.ok(appointmentService.rescheduleAfterRain(
+                id, request.getNewDate(), request.getStartTime(), request.getEndTime(), request.getRescheduledBy()));
+    }
+
+    @PostMapping("/batch-reschedule-rain")
+    public ResponseEntity<Map<String, Object>> batchRescheduleRainDelayed(
+            @RequestBody BatchRescheduleRequest request) {
+        return ResponseEntity.ok(appointmentService.rescheduleRainDelayedAppointments(
+                request.getCooperativeId(), request.getFromDate()));
+    }
+
+    @GetMapping("/machine-slot-utilization")
+    public ResponseEntity<List<Map<String, Object>>> getMachineSlotUtilization(
+            @RequestParam Long cooperativeId,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+        return ResponseEntity.ok(appointmentService.getMachineSlotUtilization(cooperativeId, startDate, endDate));
+    }
+
     @Data
     public static class ScheduleRequest {
         private Long cooperativeId;
@@ -101,5 +135,19 @@ public class AppointmentController {
         private LocalDate newDate;
         private LocalTime startTime;
         private LocalTime endTime;
+    }
+
+    @Data
+    public static class RescheduleV2Request {
+        private LocalDate newDate;
+        private LocalTime startTime;
+        private LocalTime endTime;
+        private Long rescheduledBy;
+    }
+
+    @Data
+    public static class BatchRescheduleRequest {
+        private Long cooperativeId;
+        private LocalDate fromDate;
     }
 }

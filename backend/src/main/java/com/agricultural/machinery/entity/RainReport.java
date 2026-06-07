@@ -5,51 +5,37 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "fields")
-public class Field {
+@Table(name = "rain_reports")
+public class RainReport {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String fieldName;
+    private Long fieldId;
 
     @Column(nullable = false)
-    private String location;
-
-    private String village;
-
-    private String town;
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal area;
+    private Long appointmentId;
 
     @Column(nullable = false)
-    private String cropType;
+    private Long operatorId;
 
-    private String soilType;
+    private Long machineId;
 
-    private String irrigationMethod;
-
+    @Column(nullable = false)
     private String roadCondition;
 
+    @Column(nullable = false)
     private String soilMoisture;
 
-    private LocalDateTime lastRainReportTime;
+    private Integer rainfallMm;
 
-    @Column(nullable = false)
-    private String contactName;
-
-    @Column(nullable = false)
-    private String contactPhone;
-
-    @Column(nullable = false)
-    private Long growerId;
+    private Boolean canEnterField;
 
     private String remark;
 
