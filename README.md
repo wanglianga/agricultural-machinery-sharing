@@ -56,7 +56,7 @@ docker compose up --build -d
 #### 2. 访问地址
 
 - 前端页面：http://localhost
-- 后端API：http://localhost:8080/api
+- 后端API：http://localhost:8081/api
 - MySQL数据库：localhost:3306（账号：root / root123456）
 
 #### 3. 停止服务
