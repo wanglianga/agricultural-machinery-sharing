@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: machinery-sharing-platform
+  
+  datasource:
+    url: jdbc:mysql://localhost:3306/agricultural_machinery?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    com.agricultural.machinery: DEBUG
+    org.hibernate.SQL: DEBUG

@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.mvn/
+
+# Build outputs
+target/
+dist/
+build/
+out/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Runtime and local config
+.env
+.env.*
+!.env.example
+application-local.yml
+application-local.yaml
+
+# IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# QA and browser artifacts
+coverage/
+playwright-report/
+test-results/
+output/
+screenshots/
+traces/
+
+# Docker and temp files
+*.pid
+*.tmp
+*.temp
